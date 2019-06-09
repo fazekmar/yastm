@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>YASTM</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+    .description {
+      text-align: left;
+      padding-left: 25px;
+    }
+    </style>
+  </head>
+  <body>
+    <div id="preferences">
+      <div id="mpv-settings">
+        <h4>MPV Settings</h4>
+        <div id="mpvProfile-div">
+          <input type="input" id="mpvProfile" placeholder="youtube-dl" />
+          <label for="mpvProfile">MPV Profile</label>
+          <p class="description">Add a valid mpv profile or let it blank to use the default</p>
+        </div>
+        <div id="mpvXClass-div">
+          <input type="input" id="mpvXClass" placeholder="mpv-youtube" />
+          <label for="mpvXClass">MPV window class name</label>
+          <p class="description">Set class name, useful in tiling wm (--x11-name)</p>
+          <p class="description">i3/sway example: for_window [instance="mpv-youtube"] move container to workspace 1</p>
+        </div>
+        <div id="pause-div">
+          <input type="checkbox" id="pause" />
+          <label for="pause">Pause</label>
+          <p class="description">Start the player in paused state</p>
+        </div>
+        <div id="pseudo-div">
+          <input type="checkbox" id="pseudo" />
+          <label for="pseudo">Pseudo GUI mode</label>
+          <p class="description">Enable pseudo-gui, it is useful when open an audio stream</p>
+        </div>
+      </div>
+      <div>
+      <div id="extra" style="display: none">
+        <h4>Extra</h4>
+        <div id="logging-div">
+          <input type="checkbox" id="logging" />
+          <label for="logging">Enable logging</label>
+          <p class="description">Help extension debugging</p>
+        </div>
+      </div>
+      </br>
+      <div>
+        <p id="saveMessage" class="description" style="visibility: hidden;">Successfully saved!</p>
+        <input id="save" type="button" value="Save">
+      </div>
+    </div>
+    <script src="options.js"></script>
+  </body>
+</html>

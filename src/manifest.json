@@ -1,0 +1,31 @@
+{
+  "name": "YASTM",
+  "version": "0.1.0",
+  "description": "Yet Another send video to mpv/youtube-dl browser extension",
+  "manifest_version": 2,
+  "icons": {
+    "48": "images/icons/icon-48-dark.png",
+    "96": "images/icons/icon-96-dark.png"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "yastm@fazekmar",
+      "strict_min_version": "60.0"
+    }
+  },
+  "permissions": ["storage", "nativeMessaging", "contextMenus", "tabs"],
+  "options_ui": {
+    "page": "options.html"
+  },
+  "page_action": {
+    "show_matches": ["*://*/*"],
+    "default_title": "Play current URL in MPV",
+    "default_icon": {
+      "19": "images/icons/icon-19-dark.png",
+      "38": "images/icons/icon-38-dark.png"
+    }
+  },
+  "background": {
+    "scripts": ["index.js"]
+  }
+}
