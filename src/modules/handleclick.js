@@ -3,7 +3,7 @@ import sendToNative from './sendtonative';
 import { logInfo } from './logger';
 
 export default (url) => {
-    logInfo(`handleClick: url: ${url}}`);
+    logInfo(`handleClick: url: ${url}`);
 
     chrome.storage.local.get({
         mpvProfile: '',

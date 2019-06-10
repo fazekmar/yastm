@@ -1,7 +1,7 @@
 import { logInfo, logError } from './logger';
 
 export default (msg) => {
-    logInfo(`sendToNative: ${JSON.stringify(msg, null, 4)}}`);
+    logInfo(`sendToNative: ${JSON.stringify(msg, null, 4)}`);
 
     const send = browser.runtime.sendNativeMessage('yastm', msg);
 

@@ -13,7 +13,7 @@
       "strict_min_version": "60.0"
     }
   },
-  "permissions": ["storage", "nativeMessaging", "contextMenus", "tabs"],
+  "permissions": ["storage", "nativeMessaging", "contextMenus", "activeTab"],
   "options_ui": {
     "page": "options.html"
   },
@@ -24,6 +24,13 @@
       "19": "images/icons/icon-19-dark.png",
       "38": "images/icons/icon-38-dark.png"
     }
+  },
+  "commands": {
+      "_execute_page_action": {
+          "suggested_key": {
+              "default": "Alt+M"
+          }
+      }
   },
   "background": {
     "scripts": ["index.js"]
