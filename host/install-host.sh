@@ -1,6 +1,17 @@
 #!/bin/sh
 
-INSTALL_DIR="${HOME}/.mozilla/native-messaging-hosts"
+if [ ! $(command -v python3) ]
+then
+    echo "Python3 not found, but it's needed to run the host application!"
+    exit 1
+fi
+
+if [ $(uname -s) = "Darwin" ];
+then
+    INSTALL_DIR="${HOME}/Library/Application Support/Mozilla/NativeMessagingHosts"
+else
+    INSTALL_DIR="${HOME}/.mozilla/native-messaging-hosts"
+fi
 
 HOST_DESC=$(cat <<EOF
 {
@@ -15,7 +26,7 @@ EOF
 
 # Create native messaging dir if does not exist
 if [ ! -d "${INSTALL_DIR}" ]; then
-    mkdir -p ${INSTALL_DIR}
+    mkdir -p "${INSTALL_DIR}"
 fi
 
 # Create App manifest

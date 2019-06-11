@@ -14,11 +14,13 @@ Get the add-on from Mozilla [AMO Page](https://addons.mozilla.org/en-US/firefox/
 
 ### Host application
 
-The install script currently **only** support (tested) Linux.
-MacOS support it will be ready soon.
 (I need help to Windows support)
 
-#### Linux
+#### Linux, MacOS, BSD
+
+##### Dependencies
+- `curl` (only for the install script)
+- `python3`
 
 Download and run `/host/install-host.sh`.
 
