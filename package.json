@@ -1,6 +1,6 @@
 {
   "name": "YASTM",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Yet Another send video to mpv/youtube-dl firefox add-on",
   "private": true,
   "license": "GPL-3.0",
