@@ -14,13 +14,9 @@ const savePreferences = () => {
         const logging = document.getElementById('logging').checked;
         const pseudo = document.getElementById('pseudo').checked;
         const pause = document.getElementById('pause').checked;
-        chrome.storage.local.set({
-            mpvProfile,
-            mpvXClass,
-            logging,
-            pseudo,
-            pause,
-        }, () => {
+        browser.storage.local.set({
+            mpvProfile, mpvXClass, logging, pseudo, pause,
+        }).then(() => {
             savePreferencesSendStatus(true);
         });
     } catch (e) {
@@ -29,13 +25,13 @@ const savePreferences = () => {
 };
 
 const restorePreferences = () => {
-    chrome.storage.local.get({
+    browser.storage.local.get({
         mpvProfile: '',
         mpvXClass: '',
         logging: false,
         pseudo: false,
         pause: false,
-    }, ({
+    }).then(({
         mpvProfile, mpvXClass, logging, pseudo, pause,
     }) => {
         document.getElementById('mpvProfile').value = mpvProfile;
