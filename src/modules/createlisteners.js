@@ -1,4 +1,7 @@
-export default (handleClick) => {
+import handleClick from './handleclick';
+import handleAutoplayHosts from './handleAutoplayHosts';
+
+export default () => {
     browser.contextMenus.onClicked.addListener((info) => {
         const url = info.srcUrl || info.linkUrl || info.frameURL || info.selectionText;
         switch (info.menuItemId) {
@@ -14,4 +17,6 @@ export default (handleClick) => {
     browser.pageAction.onClicked.addListener((tab) => {
         handleClick(tab.url);
     });
+
+    browser.tabs.onUpdated.addListener(handleAutoplayHosts);
 };

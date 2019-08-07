@@ -1,6 +1,6 @@
 {
   "name": "YASTM",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Yet Another send video to mpv/youtube-dl browser extension",
   "manifest_version": 2,
   "icons": {
@@ -13,7 +13,7 @@
       "strict_min_version": "60.0"
     }
   },
-  "permissions": ["storage", "nativeMessaging", "contextMenus", "activeTab"],
+  "permissions": ["storage", "nativeMessaging", "contextMenus", "tabs"],
   "options_ui": {
     "page": "options.html"
   },

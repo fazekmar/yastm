@@ -14,8 +14,9 @@ const savePreferences = () => {
         const logging = document.getElementById('logging').checked;
         const pseudo = document.getElementById('pseudo').checked;
         const pause = document.getElementById('pause').checked;
+        const autoplayHosts = document.getElementById('autoplayHosts').value;
         browser.storage.local.set({
-            mpvProfile, mpvXClass, logging, pseudo, pause,
+            mpvProfile, mpvXClass, logging, pseudo, pause, autoplayHosts,
         }).then(() => {
             savePreferencesSendStatus(true);
         });
@@ -31,14 +32,16 @@ const restorePreferences = () => {
         logging: false,
         pseudo: false,
         pause: false,
+        autoplayHosts: '',
     }).then(({
-        mpvProfile, mpvXClass, logging, pseudo, pause,
+        mpvProfile, mpvXClass, logging, pseudo, pause, autoplayHosts,
     }) => {
         document.getElementById('mpvProfile').value = mpvProfile;
         document.getElementById('mpvXClass').value = mpvXClass;
         document.getElementById('logging').checked = logging;
         document.getElementById('pseudo').checked = pseudo;
         document.getElementById('pause').checked = pause;
+        document.getElementById('autoplayHosts').value = autoplayHosts;
     });
 };
 
