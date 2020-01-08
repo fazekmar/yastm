@@ -5,4 +5,4 @@ import createListeners from './modules/createlisteners';
 createContextMenus();
 createListeners();
 
-process.on('unhandledRejection', error => logError(error));
+process.on('unhandledRejection', (error) => logError(error));

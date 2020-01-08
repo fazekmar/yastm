@@ -10,6 +10,7 @@
       padding-left: 25px;
     }
     </style>
+    <script src="options.js"></script>
   </head>
   <body>
     <div id="preferences">
@@ -36,32 +37,19 @@
           <label for="pseudo">Pseudo GUI mode</label>
           <p class="description">Enable pseudo-gui, it is useful when open an audio stream</p>
         </div>
-        <h4>Experimental</h4>
+      </div>
+      <div id="experimental-settings">
+        <h3>Experimental</h3>
         <div id="autoplayHosts-div">
+          <h4>Autoplay</h4>
+          <p>Try to auto play videos on these hosts/regexes</p>
           <input type="input" id="autoplayHosts" placeholder="youtube.com`vimeo.com" />
-          <label for="autoplayHosts">Autoplay</label>
-          <p class="description">Try to auto play videos on these hosts/regexes.
-            <br />Grave accent ( ` ) separated list!
+          <p class="description">Grave accent ( ` ) separated list!
             <br /><a href="https://stackoverflow.com/a/3726073" rel='_blank'>Youtube regex example</a>
             <br />Simple example: vimeo.com`youtube\.com\/watch\?v=
           </p>
         </div>
       </div>
-      <div>
-      <div id="extra" style="display: none">
-        <h4>Extra</h4>
-        <div id="logging-div">
-          <input type="checkbox" id="logging" />
-          <label for="logging">Enable logging</label>
-          <p class="description">Help extension debugging</p>
-        </div>
-      </div>
-      </br>
-      <div>
-        <p id="saveMessage" class="description" style="visibility: hidden;">Successfully saved!</p>
-        <input id="save" type="button" value="Save">
-      </div>
     </div>
-    <script src="options.js"></script>
   </body>
 </html>

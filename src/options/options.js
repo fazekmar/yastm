@@ -1,47 +1,53 @@
-import savePreferencesSendStatus from './modules/savestatus';
+const preferences = {
+    mpvProfile: '',
+    mpvXClass: '',
+    pseudo: false,
+    pause: false,
+    autoplayHosts: '',
+};
 
 const init = () => {
     document.addEventListener('DOMContentLoaded', () => {
         restorePreferences();
-        document.getElementById('save').addEventListener('click', savePreferences);
+        addEventListeners();
     });
 };
 
-const savePreferences = () => {
-    try {
-        const mpvProfile = document.getElementById('mpvProfile').value;
-        const mpvXClass = document.getElementById('mpvXClass').value;
-        const logging = document.getElementById('logging').checked;
-        const pseudo = document.getElementById('pseudo').checked;
-        const pause = document.getElementById('pause').checked;
-        const autoplayHosts = document.getElementById('autoplayHosts').value;
-        browser.storage.local.set({
-            mpvProfile, mpvXClass, logging, pseudo, pause, autoplayHosts,
-        }).then(() => {
-            savePreferencesSendStatus(true);
-        });
-    } catch (e) {
-        savePreferencesSendStatus(false, e);
+const savePreference = (key, type) => (event) => {
+    if (type === 'checkbox') {
+        preferences[key] = event.target.checked;
+    } else {
+        preferences[key] = event.target.value;
     }
+
+    browser.storage.local.set(preferences);
+};
+
+const addEventListeners = () => {
+    Object.keys(preferences).forEach((key) => {
+        const element = document.getElementById(key);
+        element.addEventListener('change', savePreference(key, element.type));
+    });
 };
 
 const restorePreferences = () => {
-    browser.storage.local.get({
-        mpvProfile: '',
-        mpvXClass: '',
-        logging: false,
-        pseudo: false,
-        pause: false,
-        autoplayHosts: '',
-    }).then(({
-        mpvProfile, mpvXClass, logging, pseudo, pause, autoplayHosts,
-    }) => {
-        document.getElementById('mpvProfile').value = mpvProfile;
-        document.getElementById('mpvXClass').value = mpvXClass;
-        document.getElementById('logging').checked = logging;
-        document.getElementById('pseudo').checked = pseudo;
-        document.getElementById('pause').checked = pause;
-        document.getElementById('autoplayHosts').value = autoplayHosts;
+    browser.storage.local.get().then((prefs) => {
+        Object.keys(prefs).forEach((key) => {
+            const value = prefs[key];
+            // TODO: Remove this in a future release
+            // Remove unnecessary object from storage
+            if (key === 'logging') {
+                browser.storage.local.remove(key);
+                return;
+            }
+            const element = document.getElementById(key);
+            if (element.type === 'checkbox') {
+                element.checked = value;
+            } else {
+                element.value = value;
+            }
+            preferences[key] = value;
+        });
     });
 };
 
