@@ -8,7 +8,7 @@ export default (tabId, { url }) => {
             autoplayHosts: [],
         }).then(({ autoplayHosts }) => {
             if (lastUrl !== url && autoplayHosts.some((host) => host.test(url))) {
-                handleClick(url);
+                handleClick({ url });
                 lastUrl = url;
             }
         });
