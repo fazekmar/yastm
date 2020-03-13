@@ -6,6 +6,13 @@ This is a yet another Firefox add-on that try to play URLs with mpv player.
 
 This extension creates an address bar button and a context menu item.
 
+#### Permissions
+- storage - store settings
+- tabs - get current tab URL when browser action (URL bar icon) is used
+- activeTab - load content script to pause videos in the page
+- contextMenus - create context menu item
+- nativeMessaging - communication between the host application and extension
+
 ## Install
 
 ### Add-on
