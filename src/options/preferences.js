@@ -20,5 +20,13 @@ export default {
                 commandline: '',
             },
         },
+        youtubedl: {
+            cmd: 'youtube-dl',
+            name: 'youtube-dl (only download)',
+            settings: {
+                savePath: '',
+                commandline: '',
+            },
+        },
     },
 };
