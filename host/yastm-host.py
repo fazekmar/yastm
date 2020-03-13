@@ -29,13 +29,10 @@ def startMPV():
         sys.exit(0)
     
     url = receivedMessage.get('url')
-    profile = receivedMessage.get('profile')
-    pseudo = receivedMessage.get('pseudo')
-    pause = receivedMessage.get('pause')
-    mpvXClass = receivedMessage.get('mpvXClass')
-    
-    cmd = ['mpv', '--no-terminal', profile, pseudo, pause, mpvXClass, '--', url]
-    Popen(cmd, stdin=None, stdout=None, stderr=None)
+    player = receivedMessage.get('player')
+
+    player.extend(['--', url])
+    Popen(player, stdin=None, stdout=None, stderr=None)
     
     sendMessage(encodeMessage("Ok"))
 

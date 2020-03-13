@@ -1,0 +1,1 @@
+export default (commandline) => (commandline ? commandline.split(' ') : []);

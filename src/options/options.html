@@ -9,46 +9,62 @@
       text-align: left;
       padding-left: 25px;
     }
+    div {
+      padding-bottom: 10px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    button {
+      margin-right: 25px;
+    }
     </style>
     <script src="options.js"></script>
   </head>
   <body>
     <div id="preferences">
-      <div id="mpv-settings">
-        <h4>MPV Settings</h4>
-        <div id="mpvProfile-div">
-          <input type="input" id="mpvProfile" placeholder="youtube-dl" />
-          <label for="mpvProfile">MPV Profile</label>
-          <p class="description">Add a valid mpv profile or let it blank to use the default</p>
-        </div>
-        <div id="mpvXClass-div">
-          <input type="input" id="mpvXClass" placeholder="mpv-youtube" />
-          <label for="mpvXClass">MPV window class name</label>
-          <p class="description">Set class name, useful in tiling wm (--x11-name)</p>
-          <p class="description">i3/sway example: for_window [instance="mpv-youtube"] move container to workspace 1</p>
-        </div>
-        <div id="pause-div">
-          <input type="checkbox" id="pause" />
-          <label for="pause">Pause</label>
-          <p class="description">Start the player in paused state</p>
-        </div>
-        <div id="pseudo-div">
-          <input type="checkbox" id="pseudo" />
-          <label for="pseudo">Pseudo GUI mode</label>
-          <p class="description">Enable pseudo-gui, it is useful when open an audio stream</p>
+      <div id="player-settings">
+        <h2>Player</h2>
+        Select external player: 
+        <select id="player-selector">
+        </select>
+        <div id="mpv-settings" style="display: none">
+          <h4>MPV Settings</h4>
+          <div id="mpv-profile-div">
+            <input type="input" id="mpv-profile" placeholder="youtube-dl" />
+            <label for="mpv-profile">MPV Profile</label>
+            <p class="description">Add a valid mpv profile or let it blank to use the default</p>
+          </div>
+          <div id="mpv-xClass-div">
+            <input type="input" id="mpv-xClass" placeholder="mpv-youtube" />
+            <label for="mpv-xClass">MPV window class name</label>
+            <p class="description">Set class name, useful in tiling wm (--x11-name)</p>
+            <p class="description">i3/sway example: for_window [instance="mpv-youtube"] move container to workspace 1</p>
+          </div>
+          <div id="mpv-pause-div">
+            <input type="checkbox" id="mpv-pause" />
+            <label for="mpv-pause">Pause</label>
+            <p class="description">Start the player in paused state</p>
+          </div>
+          <div id="mpv-pseudo-div">
+            <input type="checkbox" id="mpv-pseudo" />
+            <label for="mpv-pseudo">Pseudo GUI mode</label>
+            <p class="description">Enable pseudo-gui, it is useful when open an audio stream</p>
+          </div>
+          <div id="mpv-commandline-div">
+            <input type="input" id="mpv-commandline" placeholder="" />
+            <label for="mpv-commandline">Command line arguments</label>
+          </div>
         </div>
       </div>
+      <div id="autoplayHosts-div">
+        <h2>Autoplay</h2>
+        <p>Try to auto play videos on these hosts (regex)</p><br>
+        <div id="autoplayHosts"></div>
+        <div id="autoplayHostsAdd"></div>
+      </div>
       <div id="experimental-settings">
-        <h3>Experimental</h3>
-        <div id="autoplayHosts-div">
-          <h4>Autoplay</h4>
-          <p>Try to auto play videos on these hosts/regexes</p>
-          <input type="input" id="autoplayHosts" placeholder="youtube.com`vimeo.com" />
-          <p class="description">Grave accent ( ` ) separated list!
-            <br /><a href="https://stackoverflow.com/a/3726073" rel='_blank'>Youtube regex example</a>
-            <br />Simple example: vimeo.com`youtube\.com\/watch\?v=
-          </p>
-        </div>
+        <!-- <h3>Experimental</h3> -->
       </div>
     </div>
   </body>

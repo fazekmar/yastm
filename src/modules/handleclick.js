@@ -6,12 +6,10 @@ export default (url) => {
     logInfo(`handleClick: url: ${url}`);
 
     browser.storage.local.get({
-        mpvProfile: '',
-        mpvXClass: '',
-        pseudo: false,
-        pause: false,
+        player: 'mpv',
+        playerProperties: { mpv: { cmd: 'mpv', settings: {} } },
     }).then((prefs) => {
-        const msg = assembleMessage({ url, ...prefs });
+        const msg = assembleMessage({ url, prefs });
         sendToNative(msg);
     });
 };

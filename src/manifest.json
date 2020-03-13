@@ -19,7 +19,7 @@
   },
   "page_action": {
     "show_matches": ["*://*/*"],
-    "default_title": "Play current URL in MPV",
+    "default_title": "Play current URL with YASTM",
     "default_icon": {
       "19": "images/icons/icon-19-dark.png",
       "38": "images/icons/icon-38-dark.png"

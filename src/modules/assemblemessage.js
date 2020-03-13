@@ -1,9 +1,19 @@
+import mpv from './players/mpv';
 export default ({
-    url, mpvProfile, pseudo, pause, mpvXClass,
-}) => ({
-    url,
-    profile: mpvProfile ? `--profile=${mpvProfile}` : '',
-    pseudo: pseudo ? '--player-operation-mode=pseudo-gui' : '',
-    pause: pause ? '--pause' : '',
-    mpvXClass: mpvXClass ? `--x11-name=${mpvXClass}` : '',
-});
+    url, prefs,
+}) => ({ url, player: getPlayerSetting(prefs) });
+
+const getPlayerSetting = ({ player, playerProperties }) => {
+    const { cmd, settings } = playerProperties[player];
+    let playerParams = [];
+
+    switch (player) {
+        case 'mpv':
+            playerParams = [cmd, ...mpv(settings)];
+            break;
+        default:
+            break;
+    }
+
+    return playerParams;
+};
