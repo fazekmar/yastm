@@ -7,7 +7,7 @@ export default () => {
         switch (info.menuItemId) {
             case 'YASTM':
                 if (url) {
-                    handleClick(url);
+                    handleClick({ url });
                 }
                 break;
             default:
@@ -15,7 +15,7 @@ export default () => {
     });
 
     browser.pageAction.onClicked.addListener((tab) => {
-        handleClick(tab.url);
+        handleClick(tab);
     });
 
     browser.tabs.onUpdated.addListener(handleAutoplayHosts);

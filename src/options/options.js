@@ -1,9 +1,16 @@
 import updateActionsTitle from '../modules/updateactionstitle';
 import preferences from './preferences';
 
-const restorePreferences = ({ player, autoplayHosts, playerProperties }) => {
+const restorePreferences = ({
+    player, autoplayHosts, misc, playerProperties,
+}) => {
     preferences.player = player || 'mpv';
     preferences.autoplayHosts = autoplayHosts || [];
+    if (misc) {
+        Object.entries(misc).forEach(([id, value]) => {
+            preferences.misc[id] = value;
+        });
+    }
     if (playerProperties) {
         Object.entries(playerProperties).forEach(([playerName, commonSettings]) => {
             Object.assign(preferences.playerProperties[playerName].settings, commonSettings.settings);
@@ -12,6 +19,14 @@ const restorePreferences = ({ player, autoplayHosts, playerProperties }) => {
 };
 
 const savePreferencesToStorage = () => browser.storage.local.set(preferences);
+
+const setSettingValue = (element, value) => {
+    if (element.type === 'checkbox') {
+        element.checked = value;
+    } else {
+        element.value = value;
+    }
+};
 
 // Player selector
 const renderPlayerSelector = () => {
@@ -57,16 +72,33 @@ const toggleSettings = () => {
     });
 };
 
+// Misc settings
+const renderMiscSettings = () => {
+    Object.entries(preferences.misc).forEach(([id, value]) => {
+        const element = document.getElementById(id);
+        if (element) {
+            setSettingValue(element, value);
+            element.addEventListener('change', saveMiscSetting(id, element.type));
+        }
+    });
+};
+
+const saveMiscSetting = (key, type) => (event) => {
+    if (type === 'checkbox') {
+        preferences.misc[key] = event.target.checked;
+    } else {
+        preferences.misc[key] = event.target.value;
+    }
+
+    savePreferencesToStorage();
+};
+
 // Player settings
 const renderPlayerSettings = () => {
     Object.entries(preferences.playerProperties).forEach(([player, commonSettings]) => {
         Object.entries(commonSettings.settings).forEach(([id, value]) => {
             const element = document.getElementById(`${player}-${id}`);
-            if (element.type === 'checkbox') {
-                element.checked = value;
-            } else {
-                element.value = value;
-            }
+            setSettingValue(element, value);
         });
     });
 };
@@ -159,6 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
         renderPlayerSelector();
         renderPlayerSettings();
         addPlayerSettingEventListeners();
+        renderMiscSettings();
         renderAutoplayHostList();
         createAddToAutoplayHostList();
     });

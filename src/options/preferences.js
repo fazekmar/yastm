@@ -1,6 +1,9 @@
 export default {
     player: '',
     autoplayHosts: [],
+    misc: {
+        autoPause: false,
+    },
     playerProperties: {
         mpv: {
             cmd: 'mpv',
