@@ -13,5 +13,12 @@ export default {
                 commandline: '',
             },
         },
+        celluloid: {
+            cmd: 'gnome-mpv',
+            name: 'Celluloid (ex gnome-mpv)',
+            settings: {
+                commandline: '',
+            },
+        },
     },
 };
