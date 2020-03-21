@@ -85,13 +85,29 @@ const renderMiscSettings = () => {
 };
 
 const saveMiscSetting = (key, type) => (event) => {
-    if (type === 'checkbox') {
-        preferences.misc[key] = event.target.checked;
-    } else {
-        preferences.misc[key] = event.target.value;
+    let saveValue = type === 'checkbox' ? event.target.checked : event.target.value;
+    switch (key) {
+        case 'bookmarks':
+            if (saveValue) {
+                browser.permissions.request({ permissions: ['bookmarks'] }).then((enabled) => {
+                    if (!enabled) {
+                        saveValue = false;
+                        event.target.checked = false;
+                    }
+                    preferences.misc[key] = saveValue;
+                    savePreferencesToStorage();
+                });
+            } else {
+                browser.permissions.remove({ permissions: ['bookmarks'] }).then(() => {
+                    preferences.misc[key] = saveValue;
+                    savePreferencesToStorage();
+                });
+            }
+            break;
+        default:
+            preferences.misc[key] = saveValue;
+            savePreferencesToStorage();
     }
-
-    savePreferencesToStorage();
 };
 
 // Player settings

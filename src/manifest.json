@@ -14,7 +14,7 @@
     }
   },
   "permissions": ["storage", "nativeMessaging", "contextMenus", "activeTab"],
-  "optional_permissions": ["tabs"],
+  "optional_permissions": ["tabs", "bookmarks"],
   "options_ui": {
     "page": "options.html"
   },

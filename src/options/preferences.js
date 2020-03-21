@@ -4,6 +4,7 @@ export default {
     autoplayHosts: [],
     misc: {
         autoPause: false,
+        bookmarks: false,
     },
     playerProperties: {
         mpv: {

@@ -1,7 +1,11 @@
 const setContextMenuTitle = (title) => {
     browser.contextMenus.update(
-        'YASTM',
+        'yastm-contextMenu',
         { title: `Play URL in &${title}` },
+    );
+    browser.contextMenus.update(
+        'yastm-bookmarkMenu',
+        { title: `Play Bookmark in &${title}` },
     );
 };
 
