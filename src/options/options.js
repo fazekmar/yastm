@@ -192,20 +192,21 @@ const renderAutoplayHostList = () => {
 const addToAutoplayHosts = () => {
     const element = document.getElementById('autoplayHostsAddForm');
     const host = element.value;
+    let regHost;
 
     if (host) {
         element.value = '';
         try {
-            RegExp(host);
+            regHost = RegExp(host);
         } catch (e) {
             return;
         }
         if (preferences.autoplayHosts.some((hostReg) => hostReg.source === host)) {
             return;
         }
-        preferences.autoplayHosts.push(RegExp(host));
+        preferences.autoplayHosts.push(regHost);
         savePreferencesToStorage();
-        document.getElementById('autoplayHosts').appendChild(createElementDiv(host));
+        document.getElementById('autoplayHosts').appendChild(createElementDiv(regHost.source));
     }
 };
 
