@@ -5,9 +5,9 @@ let lastUrl = '';
 export default (tabId, { url }) => {
     if (url) {
         browser.storage.local.get({
-            autoplayHosts: [],
-        }).then(({ autoplayHosts }) => {
-            if (lastUrl !== url && autoplayHosts.some((host) => host.test(url))) {
+            autoPlay: false, autoplayHosts: [],
+        }).then(({ autoPlay, autoplayHosts }) => {
+            if (autoPlay && lastUrl !== url && autoplayHosts.some((host) => host.test(url))) {
                 handleClick({ url });
                 lastUrl = url;
             }

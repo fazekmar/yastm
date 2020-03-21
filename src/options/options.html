@@ -88,9 +88,13 @@
       </div>
       <div id="autoplayHosts-div">
         <h2>Autoplay</h2>
-        <p>Try to auto play videos on these hosts (regex)</p><br>
-        <div id="autoplayHosts"></div>
-        <div id="autoplayHostsAdd"></div>
+        <input type="checkbox" id="autoPlay" />
+        <label for="autoPlay">Enable autoplay</label>
+        <p class="description">Try to auto play videos on these hosts (regex)</p><br>
+        <div id="autoplayHostList-div" style="display: none;">
+          <div id="autoplayHosts"></div>
+          <div id="autoplayHostsAdd"></div>
+        </div>
       </div>
       <div id="experimental-settings">
         <!-- <h3>Experimental</h3> -->

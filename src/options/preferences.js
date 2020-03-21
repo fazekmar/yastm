@@ -1,5 +1,6 @@
 export default {
     player: '',
+    autoPlay: false,
     autoplayHosts: [],
     misc: {
         autoPause: false,

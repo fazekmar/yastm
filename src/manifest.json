@@ -13,7 +13,8 @@
       "strict_min_version": "60.0"
     }
   },
-  "permissions": ["storage", "nativeMessaging", "contextMenus", "tabs", "activeTab"],
+  "permissions": ["storage", "nativeMessaging", "contextMenus", "activeTab"],
+  "optional_permissions": ["tabs"],
   "options_ui": {
     "page": "options.html"
   },

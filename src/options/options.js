@@ -2,9 +2,10 @@ import updateActionsTitle from '../modules/updateactionstitle';
 import preferences from './preferences';
 
 const restorePreferences = ({
-    player, autoplayHosts, misc, playerProperties,
+    player, autoPlay, autoplayHosts, misc, playerProperties,
 }) => {
     preferences.player = player || 'mpv';
+    preferences.autoPlay = autoPlay || false;
     preferences.autoplayHosts = autoplayHosts || [];
     if (misc) {
         Object.entries(misc).forEach(([id, value]) => {
@@ -126,10 +127,23 @@ const savePlayerSetting = (player, key, type) => (event) => {
 };
 
 // Autoplay options
-const renderAutoplayHostList = () => {
-    const containerElement = document.getElementById('autoplayHosts');
-    if (preferences.autoplayHosts.length > 0) {
-        preferences.autoplayHosts.forEach((hostReg) => containerElement.appendChild(createElementDiv(hostReg.source)));
+const setAutoPlay = () => (event) => {
+    if (event.target.checked) {
+        browser.permissions.request({ permissions: ['tabs'] }).then((enabled) => {
+            if (enabled) {
+                preferences.autoPlay = true;
+                savePreferencesToStorage();
+                document.getElementById('autoplayHostList-div').style.display = '';
+            } else {
+                document.getElementById('autoPlay').checked = false;
+            }
+        });
+    } else {
+        browser.permissions.remove({ permissions: ['tabs'] }).then(() => {
+            preferences.autoPlay = false;
+            savePreferencesToStorage();
+            document.getElementById('autoplayHostList-div').style.display = 'none';
+        });
     }
 };
 
@@ -142,6 +156,21 @@ const createAddToAutoplayHostList = () => {
     input.id = 'autoplayHostsAddForm';
     input.placeholder = 'youtube.com';
     element.appendChild(input);
+};
+
+const renderAutoplayHostList = () => {
+    const element = document.getElementById('autoPlay');
+    if (element) {
+        setSettingValue(element, preferences.autoPlay);
+        element.addEventListener('change', setAutoPlay());
+    }
+    document.getElementById('autoplayHostList-div').style.display = preferences.autoPlay ? '' : 'none';
+    const containerElement = document.getElementById('autoplayHosts');
+    if (preferences.autoplayHosts.length > 0) {
+        preferences.autoplayHosts.forEach((hostReg) => containerElement.appendChild(createElementDiv(hostReg.source)));
+    }
+
+    createAddToAutoplayHostList();
 };
 
 const addToAutoplayHosts = () => {
@@ -193,6 +222,5 @@ document.addEventListener('DOMContentLoaded', () => {
         addPlayerSettingEventListeners();
         renderMiscSettings();
         renderAutoplayHostList();
-        createAddToAutoplayHostList();
     });
 });
