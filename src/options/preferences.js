@@ -11,6 +11,7 @@ export default {
             cmd: 'mpv',
             name: 'mpv',
             settings: {
+                enabled: true,
                 profile: '',
                 xClass: '',
                 pseudo: false,
@@ -22,6 +23,7 @@ export default {
             cmd: 'gnome-mpv',
             name: 'Celluloid (ex gnome-mpv)',
             settings: {
+                enabled: true,
                 commandline: '',
             },
         },
@@ -29,6 +31,7 @@ export default {
             cmd: 'youtube-dl',
             name: 'youtube-dl (only download)',
             settings: {
+                enabled: true,
                 savePath: '',
                 commandline: '',
             },

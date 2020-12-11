@@ -40,8 +40,8 @@ module.exports = {
                 {
                     from: 'src/options/options.html',
                     to: 'options.html',
-                }
-            ]
+                },
+            ],
         }),
     ],
 };

@@ -1,4 +1,4 @@
-import updateActionsTitle from '../modules/updateactionstitle';
+import updateActions from '../modules/updateactions';
 import preferences from './preferences';
 
 const restorePreferences = ({
@@ -19,7 +19,10 @@ const restorePreferences = ({
     }
 };
 
-const savePreferencesToStorage = () => browser.storage.local.set(preferences);
+const savePreferencesToStorage = () => {
+    updateActions(preferences);
+    browser.storage.local.set(preferences);
+};
 
 const setSettingValue = (element, value) => {
     if (element.type === 'checkbox') {
@@ -65,7 +68,6 @@ const toggleSettings = () => {
         if (commonSettings.name === selector.options[index].innerText) {
             div.style.display = '';
             preferences.player = player;
-            updateActionsTitle(commonSettings.name);
             savePreferencesToStorage();
         } else {
             div.style.display = 'none';

@@ -1,5 +1,6 @@
 import handleClick from './handleclick';
 import handleAutoplayHosts from './handleAutoplayHosts';
+import updateActions from './updateactions';
 
 export default () => {
     browser.contextMenus.onClicked.addListener((info) => {
@@ -9,6 +10,11 @@ export default () => {
                 break;
             case 'yastm-bookmarkMenu':
                 handleBookmarkMenu(info);
+                break;
+            case 'yastm-pageAction-mpv':
+            case 'yastm-pageAction-celluloid':
+            case 'yastm-pageAction-youtubedl':
+                handlePageActionMenu(info);
                 break;
             default:
         }
@@ -31,6 +37,13 @@ export default () => {
                 });
             });
         }
+    };
+
+    const handlePageActionMenu = (info) => {
+        const player = info.menuItemId.split('-')[2];
+        browser.storage.local.set({ player }).then(() => browser.storage.local.get().then((prefs) => {
+            updateActions(prefs);
+        }));
     };
 
     browser.pageAction.onClicked.addListener((tab) => {

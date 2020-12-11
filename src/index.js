@@ -1,13 +1,23 @@
-import { logError } from './modules/logger';
 import createContextMenus from './modules/createcontextmenus';
 import createListeners from './modules/createlisteners';
-import updateActionsTitle from './modules/updateactionstitle';
+import updateActions from './modules/updateactions';
+import preferences from './options/preferences';
 
 // Migrate settings to the new structure
 browser.storage.local.get().then((prefs) => {
-    if (prefs.playerProperties) {
+    // Init default setting in the first run
+    if (Object.keys(prefs).length === 0) {
+        preferences.player = 'mpv';
+        browser.storage.local.set(preferences);
+        init();
         return;
     }
+
+    if (prefs.playerProperties) {
+        init();
+        return;
+    }
+
     const playerProperties = {
         mpv: {
             settings: {
@@ -57,16 +67,15 @@ browser.storage.local.get().then((prefs) => {
             browser.storage.local.remove('pause');
         }
         browser.storage.local.set({ player: 'mpv', playerProperties });
+        init();
     });
 });
 
-createContextMenus();
-createListeners();
+const init = () => {
+    createContextMenus();
+    createListeners();
 
-browser.storage.local.get().then(({ player, playerProperties }) => {
-    if (player) {
-        updateActionsTitle(playerProperties[player].name);
-    }
-});
-
-process.on('unhandledRejection', (error) => logError(error));
+    browser.storage.local.get().then((prefs) => {
+        updateActions(prefs);
+    });
+};

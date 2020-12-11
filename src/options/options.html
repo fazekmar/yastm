@@ -11,7 +11,6 @@
     }
     div {
       padding-bottom: 10px;
-      white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
@@ -30,6 +29,11 @@
         </select>
         <div id="mpv-settings" style="display: none">
           <h4>MPV Settings</h4>
+          <div id="mpv-enabled-div">
+            <input type="checkbox" id="mpv-enabled" />
+            <label for="mpv-enabled">Show in the address bar button's context menu</label>
+            <p class="description"></p>
+          </div>
           <div id="mpv-profile-div">
             <input type="input" id="mpv-profile" placeholder="youtube-dl" />
             <label for="mpv-profile">MPV Profile</label>
@@ -58,6 +62,11 @@
         </div>
         <div id="celluloid-settings" style="display: none">
           <h4>Celluloid Settings</h4>
+          <div id="celluloid-enabled-div">
+            <input type="checkbox" id="celluloid-enabled" />
+            <label for="celluloid-enabled">Show in the address bar button's context menu</label>
+            <p class="description"></p>
+          </div>
           <div id="celluloid-commandline-div">
             <input type="input" id="celluloid-commandline" placeholder="" />
             <label for="celluloid-commandline">Command line arguments</label>
@@ -65,6 +74,11 @@
         </div>
         <div id="youtubedl-settings" style="display: none">
           <h4>youtube-dl Settings</h4>
+          <div id="youtubedl-enabled-div">
+            <input type="checkbox" id="youtubedl-enabled" />
+            <label for="youtubedl-enabled">Show in the address bar button's context menu</label>
+            <p class="description"></p>
+          </div>
           <div id="youtubedl-savePath-div">
             <input type="input" id="youtubedl-savePath" placeholder="~/Downloads" />
             <label for="youtubedl-savePath">Downloads folder</label>
