@@ -27,17 +27,21 @@ module.exports = {
         ],
     },
     plugins: [
-        new CopyWebpackPlugin([{
-            from: 'src/images/',
-            to: 'images/',
-        }]),
-        new CopyWebpackPlugin([{
-            from: 'src/manifest.json',
-            to: 'manifest.json',
-        }]),
-        new CopyWebpackPlugin([{
-            from: 'src/options/options.html',
-            to: 'options.html',
-        }]),
+        new CopyWebpackPlugin({
+            patterns: [
+                {
+                    from: 'src/images/',
+                    to: 'images/',
+                },
+                {
+                    from: 'src/manifest.json',
+                    to: 'manifest.json',
+                },
+                {
+                    from: 'src/options/options.html',
+                    to: 'options.html',
+                }
+            ]
+        }),
     ],
 };
