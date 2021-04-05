@@ -1,5 +1,5 @@
 import handleClick from './handleclick';
-import handleAutoplayHosts from './handleAutoplayHosts';
+import { handleAutoplayHosts, handleTabClose } from './handleAutoplayHosts';
 import updateActions from './updateactions';
 
 export default () => {
@@ -51,4 +51,5 @@ export default () => {
     });
 
     browser.tabs.onUpdated.addListener(handleAutoplayHosts);
+    browser.tabs.onRemoved.addListener(handleTabClose);
 };

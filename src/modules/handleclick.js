@@ -1,5 +1,6 @@
 import assembleMessage from './assemblemessage';
 import sendToNative from './sendtonative';
+import extractConsentURL from './extractConsentURL';
 import { logInfo } from './logger';
 
 export default ({ id, url }) => {
@@ -10,7 +11,9 @@ export default ({ id, url }) => {
         misc: { autoPause: false },
         playerProperties: { mpv: { cmd: 'mpv', settings: {} } },
     }).then((prefs) => {
-        const msg = assembleMessage({ url, prefs });
+        const newURL = extractConsentURL(url);
+
+        const msg = assembleMessage({ url: newURL, prefs });
         sendToNative(msg);
         if (prefs.misc.autoPause && id) {
             browser.tabs.executeScript(
